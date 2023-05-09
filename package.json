@@ -1,0 +1,35 @@
+{
+  "name": "ethereumeip712signature2021suite",
+  "version": "0.0.1",
+  "description": "EthereumEip712Signature2021   (https://w3c-ccg.github.io/ethereum-eip712-signature-2021-spec)",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "test": "mocha --timeout 20000",
+    "build": "rimraf dist && tsc",
+    "test-with-coverage": "nyc --reporter=text --reporter=html  mocha --timeout 20000"
+  },
+  "keywords": [
+    "eip712",
+    "EthereumEip712Signature2021"
+  ],
+  "author": "Pratap Mridha",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bip39": "^3.1.0",
+    "eth-sig-util": "^3.0.1",
+    "ethers": "^6.3.0",
+    "jcs": "git+https://github.com/hypersign-protocol/JCS.git",
+    "jsonld": "^3.1.1",
+    "jsonld-signatures": "^9.3.0",
+    "web3": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
