@@ -201,7 +201,7 @@ const vector3 = {
   },
   "inputOptions": {
     "date": "2021-08-30T13:28:02Z",
-    "verificationMethod": "did:pkh:eip155:1:0xAED7EA8035eEc47E657B34eF5D020c7005487443",
+    "verificationMethod": "did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443",
     "domain": {
       "name": "Test"
     },
@@ -211,7 +211,7 @@ const vector3 = {
     "created": "2021-08-30T13:28:02Z",
     "proofPurpose": "assertionMethod",
     "type": "EthereumEip712Signature2021",
-    "verificationMethod": "did:pkh:eip155:1:0xAED7EA8035eEc47E657B34eF5D020c7005487443",
+    "verificationMethod": "did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443",
     "proofValue": "0xc932c9f35b465f3f4f208ce7aa3335541ddb1e3d970ed36b9db29c13deadb54d53b5d87eafce0f9df6deb42e9522c079a995166d5c4f711d9ce9b6bde0747a461c"
   }
 }
