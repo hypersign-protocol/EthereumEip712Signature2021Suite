@@ -11,5 +11,5 @@ npm run build
 3. Test
 
 ```bash
-start live server in browserTest folder and open index.html
+npm run start
 ```
