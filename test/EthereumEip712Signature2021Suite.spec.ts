@@ -6,22 +6,22 @@ import { purposes } from 'jsonld-signatures'
 import assert from "assert";
 import { EIP712TypedData } from "../src/TypedData/Eip712Types";
 
-const x={
-      
+const x = {
+
   "message": {
-        "@context": ["https://schema.org", "https://w3id.org/security/v2"],
-        "@type": "Person",
-        "name": {
-          "first": "Jane",
-          "last": "Doe"
-        },
-        "otherData": {
-          "jobTitle": "Professor",
-          "school": "University of ExampleLand"
-        },
-        "telephone": "(425) 123-4567",
-        "email": "jane.doe@example.com"
-      },
+    "@context": ["https://schema.org", "https://w3id.org/security/v2"],
+    "@type": "Person",
+    "name": {
+      "first": "Jane",
+      "last": "Doe"
+    },
+    "otherData": {
+      "jobTitle": "Professor",
+      "school": "University of ExampleLand"
+    },
+    "telephone": "(425) 123-4567",
+    "email": "jane.doe@example.com"
+  },
   "primaryType": "Document",
   "types": { "Document": [{ "name": "@context", "type": "string[]" }, { "name": "@type", "type": "string" }, { "name": "email", "type": "string" }, { "name": "name", "type": "Name" }, { "name": "otherData", "type": "OtherData" }, { "name": "telephone", "type": "string" }], "Name": [{ "name": "first", "type": "string" }, { "name": "last", "type": "string" }], "OtherData": [{ "name": "jobTitle", "type": "string" }, { "name": "school", "type": "string" }] }
 }
@@ -49,7 +49,7 @@ const vector1 = {
     "proofPurpose": "assertionMethod",
     "type": "EthereumEip712Signature2021",
     "verificationMethod": "did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443#key-1",
-    "proofValue": "0x3d4518532cb589760742045bce8deb57dab474a3db500a7162b53ed43b034ef332e7e7f0c361140c366505e820ee4146f4fdd918e3dd27286f70df6435ab0b821c",
+    "proofValue": "0xd8ced27b921866a9cb6fb859503714ad4be03ae70706237d05c9f113da7f4a1d7f74f9f9df4301571f5c4f253c09e1b5119a85f00760f33924d72a07d31881ec1b",
     "eip712Domain": {
       "domain": {
         "name": "Test"
@@ -264,13 +264,7 @@ describe('Suite Testcase ', () => {
       date: vector1.inputOptions.date,
       domain: vector1.inputOptions.domain,
       documentLoader: customDocLoader,
-
-
     })
-
-    
-    
-
     assert.equal(proof.proofPurpose, 'assertionMethod')
     assert.equal(proof.type, 'EthereumEip712Signature2021')
     assert.equal(proof.verificationMethod, 'did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443#key-1')
@@ -290,9 +284,6 @@ describe('Suite Testcase ', () => {
     assert.equal(proof.eip712Domain.messageSchema.Document[6].name, 'telephone')
     assert.equal(proof.eip712Domain.messageSchema.Document[6].type, 'string')
     assert.equal(proof.eip712Domain.primaryType, 'Document')
-
-    
-
     const verificationResult = await EthereumEip712Signature2021obj.verifyProof({
       proof: proof,
       document: vector1.inputDocument,
@@ -316,8 +307,6 @@ describe('Suite Testcase ', () => {
       domain: vector2.inputOptions.domain,
       documentLoader: customDocLoader
     })
-
-
     assert.equal(proof.proofPurpose, 'assertionMethod')
     assert.equal(proof.type, 'EthereumEip712Signature2021')
     assert.equal(proof.proofValue, vector2.proof.proofValue)
