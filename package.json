@@ -6,9 +6,7 @@
   "scripts": {
     "build": "rimraf lib && tsc",
     "test": "nyc --reporter=text --no-clean mocha --timeout 20000",
-    "coverage":"nyc report --reporter=lcov --reporter=json-summary  --report-dir coverage"
-
-
+    "coverage": "nyc report --reporter=lcov --reporter=json-summary  --report-dir coverage"
   },
   "keywords": [
     "eip712",
