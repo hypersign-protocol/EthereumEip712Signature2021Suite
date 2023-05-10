@@ -17,6 +17,11 @@ npm i https://github.com/hypersign-protocol/EthereumEip712Signature2021Suite.git
 import {EthereumEip712Signature2021Suite} from 'EthereumEip712Signature2021Suite';
 import { purposes } from 'jsonld-signatures'
 
+// can pass baseWallet from ethers
+// new EthereumEip712Signature2021Suite(baseWalletObj);
+// or can use metamask object
+// var web3=new Web3(window.ethereum);
+// new EthereumEip712Signature2021Suite({},web3);
 const suite = new EthereumEip712Signature2021Suite({});
 
 const kp=await EthereumEip712Signature2021obj.fromPrivateKey('0x149195a4059ac8cafe2d56fc612f613b6b18b9265a73143c9f6d7cfbbed76b7e');
