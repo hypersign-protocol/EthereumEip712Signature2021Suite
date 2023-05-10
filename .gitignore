@@ -1,3 +1,4 @@
 node_modules
 browserTest/node_modules
 browserTest/dist
+coverage
