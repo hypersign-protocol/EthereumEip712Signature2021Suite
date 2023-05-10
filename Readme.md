@@ -95,6 +95,7 @@ const proof = await EthereumEip712Signature2021obj.createProof({
 
 ```bash
 "proof": {
+    "canonicalizationHash": "5c78f22ed4f5617ed2cfe8feec7a14ec9d23e7fa28ffc70291d141de169844f7",
     "created": "2021-08-30T13:28:02Z",
     "proofPurpose": "assertionMethod",
     "type": "EthereumEip712Signature2021",
