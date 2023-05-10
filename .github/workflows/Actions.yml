@@ -30,5 +30,9 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - run: npm run coverage
+    - name: Set code coverage commit status 📫
+      run: npx -p check-code-coverage set-gh-status
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
  
