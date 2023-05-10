@@ -2,11 +2,13 @@
   "name": "ethereumeip712signature2021suite",
   "version": "0.0.1",
   "description": "EthereumEip712Signature2021   (https://w3c-ccg.github.io/ethereum-eip712-signature-2021-spec)",
-  "main": "dist/src/index.js",
+  "main": "lib/src/index.js",
   "scripts": {
-    "test": "mocha --timeout 20000",
     "build": "rimraf lib && tsc",
-    "test-with-coverage": "nyc --reporter=text --reporter=html  mocha --timeout 20000"
+    "test": "nyc --reporter=text --no-clean mocha --timeout 20000",
+    "coverage":"nyc report --reporter=lcov --reporter=json-summary  --report-dir coverage"
+
+
   },
   "keywords": [
     "eip712",
@@ -26,6 +28,8 @@
   "devDependencies": {
     "@types/mocha": "^10.0.1",
     "chai": "^4.3.7",
+    "check-code-coverage": "^1.10.4",
+    "coveralls": "^3.1.1",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "rimraf": "^5.0.0",
