@@ -99,7 +99,7 @@ const proof = await EthereumEip712Signature2021obj.createProof({
     "proofPurpose": "assertionMethod",
     "type": "EthereumEip712Signature2021",
     "verificationMethod": "did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443#key-1",
-    "proofValue": "0xc932c9f35b465f3f4f208ce7aa3335541ddb1e3d970ed36b9db29c13deadb54d53b5d87eafce0f9df6deb42e9522c079a995166d5c4f711d9ce9b6bde0747a461c",
+    "proofValue": "0xd8ced27b921866a9cb6fb859503714ad4be03ae70706237d05c9f113da7f4a1d7f74f9f9df4301571f5c4f253c09e1b5119a85f00760f33924d72a07d31881ec1b",
     "eip712Domain": {
       "domain": {
         "name": "Test"
