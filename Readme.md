@@ -153,7 +153,8 @@ const proof = await EthereumEip712Signature2021obj.createProof({
     }
   }
 ```
-
+## License
+[MIT License](LICENSE) © Hypersign-Protocol
 
 
 
