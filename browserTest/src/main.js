@@ -1,5 +1,6 @@
-import { EthereumEip712Signature2021 } from 'ethereumeip712signature2021suite'
+
 import { purposes } from 'jsonld-signatures'
+import { EthereumEip712Signature2021 } from 'ethereumeip712signature2021suite';
 
 const Web3 = require("web3");
 const ethEnabled = async () => {
