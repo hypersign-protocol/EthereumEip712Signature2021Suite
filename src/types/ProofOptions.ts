@@ -1,5 +1,9 @@
 import { TypedDataDomain, TypedDataField } from "ethers/types/hash/typed-data";
 
+
+//@ts-ignore
+import { purposes } from 'jsonld-signatures'
+
 export interface CreateProofOptions {
     domain?: TypedDataDomain;
     types?: Record<string, TypedDataField[]>;
@@ -7,7 +11,7 @@ export interface CreateProofOptions {
     readonly verificationMethod?: string;
     readonly date?: string | Date;
     readonly document: any;
-    readonly purpose: any;
+    readonly purpose: purposes ;
     embed?: boolean;
     documentLoader?: Function;
     expansionMap?: Function;

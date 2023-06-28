@@ -143,12 +143,6 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
 
 
-
-
-
-
-
-
   async canonicalizationHash(message: object) {
     const c14nDocument = await jsonld.canonize(message, {
       algorithm: "URDNA2015",

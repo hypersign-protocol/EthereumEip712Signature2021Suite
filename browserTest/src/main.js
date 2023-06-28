@@ -11,9 +11,7 @@ const ethEnabled = async () => {
   }
   return false;
 }
-
 const vector1 = {
-  "privateKey": "0x149195a4059ac8cafe2d56fc612f613b6b18b9265a73143c9f6d7cfbbed76b7e",
   "inputDocument": {
     "@context": ["https://schema.org", "https://w3id.org/security/v2"],
     "@type": "Person",
@@ -21,11 +19,11 @@ const vector1 = {
     "lastName": "Does",
     "jobTitle": "Professor",
     "telephone": "(425) 123-4567",
-    "email": "jane.doe@example.com",
+    "email": "jane.doe@example.com"
   },
   "inputOptions": {
     "date": "2021-08-30T13:28:02Z",
-    "verificationMethod": "did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443#key-1",
+    "verificationMethod": "did:hid:testnet:0xd234956e0d196effafb0169cb2822b0c89d0fff3#key-1",
     "domain": {
       "name": "Test"
     }
@@ -75,7 +73,7 @@ const vector1 = {
       "primaryType": "Document"
     }
   }
-};
+}
 
 const customDocLoader = (url) => {
   //@ts-ignore
@@ -111,7 +109,7 @@ document.getElementById("initiate").addEventListener("click", async () => {
   document.getElementById('proof').innerHTML = JSON.stringify(proof, null, 2)
 
 
-
+console.log(proof)
   const verificationResult = await ethereumeip712signature2021suite.verifyProof({
     proof: proof,
     document: vector1.inputDocument,
@@ -120,6 +118,7 @@ document.getElementById("initiate").addEventListener("click", async () => {
     purpose: new purposes.AssertionProofPurpose(),
     documentLoader: customDocLoader,
   });
+  console.log(verificationResult);
   document.getElementById('verificationResult').innerHTML = JSON.stringify(verificationResult, null, 2)
 
 
