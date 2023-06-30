@@ -1,4 +1,4 @@
-import { TypedDataDomain, TypedDataField } from "ethers/types/hash/typed-data";
+import { TypedDataDomain,TypedDataField } from "ethers";
 
 
 export interface EIP712SignatureOptions {

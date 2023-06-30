@@ -1,4 +1,4 @@
-import { TypedDataDomain, TypedDataField } from "ethers/types/hash/typed-data";
+import { TypedDataDomain, TypedDataField } from "ethers";
 import { purposes } from 'jsonld-signatures';
 export interface CreateProofOptions {
     domain?: TypedDataDomain;
