@@ -84,8 +84,8 @@ const proof = await EthereumEip712Signature2021obj.createProof({
  const result = await EthereumEip712Signature2021obj.verifyProof({
       proof,
       document: inputData,
-      types: proof.eip712Domain.messageSchema,
-      domain: proof.eip712Domain.domain,
+      types: proof.eip712.types,
+      domain: proof.eip712.domain,
       purpose: new purposes.AssertionProofPurpose(),
       documentLoader: customDocLoader,
     })   
@@ -101,11 +101,11 @@ const proof = await EthereumEip712Signature2021obj.createProof({
     "type": "EthereumEip712Signature2021",
     "verificationMethod": "did:hid:testnet:0xAED7EA8035eEc47E657B34eF5D020c7005487443#key-1",
     "proofValue": "0xd8ced27b921866a9cb6fb859503714ad4be03ae70706237d05c9f113da7f4a1d7f74f9f9df4301571f5c4f253c09e1b5119a85f00760f33924d72a07d31881ec1b",
-    "eip712Domain": {
+    "eip712": {
       "domain": {
         "name": "Test"
       },
-      "messageSchema": {
+      "types": {
         "Data": [
           {
             "name": "job",
