@@ -23,11 +23,9 @@ class EIP712TypedData {
             Object.keys(input).forEach((key, index) => {
                 const type = typeof input[key]
                // REMOVE THIS 
-                if (this.keys.has(key)) {
-                    key = key + "_" + this.keys.get(key)
-                } else {
-                    this.keys.set(key, this.keys.get(key) as number + 1)
-                }
+               
+              
+                
                 // Till here
                 if (type == "object") {
                     if (Array.isArray(input[key])) {

@@ -104,6 +104,8 @@ const typeOut2 = {
 describe('Types', () => {
     it('Should be able to generate a Types EIP712', () => {
         const types = new EIP712TypedData().generateTypes(typeVector1, "Document")
+        console.log(types);
+        
         assert.deepStrictEqual(types, typeOut1)
 
     })
