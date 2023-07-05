@@ -55,18 +55,9 @@ class EIP712TypedData {
 
                         } else {
 
-                            // throw new Error("Array of objects not supported");
-
-                            // REMOVE THIS                
-                            if (this.keys.has(key)) {
-                                key = key + "_" + (this.keys.get(key) === undefined ? 0 : this.keys.get(key) as number)
-                                this.keys.set(key, this.keys.get(key) === undefined ? 0 : this.keys.get(key) as number + 1)
-                            } else {
-                                this.keys.set(key, 0)
-                            }
+                            // throw new Error("Array of objects not supported")
 
 
-                            // Till here
 
                             let output = {}
                             out.push({
@@ -78,16 +69,7 @@ class EIP712TypedData {
 
                         }
                     } else {
-                        // REMOVE THIS                
-                        if (this.keys.has(key)) {
-                            key = key + "_" + (this.keys.get(key) === undefined ? 0 : this.keys.get(key) as number)
-                            this.keys.set(key, this.keys.get(key) === undefined ? 0 : this.keys.get(key) as number + 1)
-                        } else {
-                            this.keys.set(key, 0)
-                        }
 
-
-                        // Till here
 
                         out.push({
                             name: key,
