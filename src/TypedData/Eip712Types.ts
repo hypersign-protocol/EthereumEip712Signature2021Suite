@@ -11,15 +11,24 @@ JSON.canonify = JCS.cannonicalize
 
 
 class EIP712TypedData {
+    private keys: Map<string, number> = new Map<string, number>()
     finalOutput: any = {}
     private BFS(input: any, type: string, finalOutput: any) {
         let out: any = []
         let queue = []
         queue.push(type)
         while (queue.length > 0) {
+
             let current = queue.shift()
             Object.keys(input).forEach((key, index) => {
                 const type = typeof input[key]
+               // REMOVE THIS 
+                if (this.keys.has(key)) {
+                    key = key + "_" + this.keys.get(key)
+                } else {
+                    this.keys.set(key, this.keys.get(key) as number + 1)
+                }
+                // Till here
                 if (type == "object") {
                     if (Array.isArray(input[key])) {
                         const isString = input[key].length > 0 && input[key].every((value: any) => {
@@ -65,20 +74,18 @@ class EIP712TypedData {
 
                         }
                     } else {
-
                         out.push({
                             name: key,
                             type: key.charAt(0).toUpperCase() + key.slice(1)
                         })
-
-
-
 
                         this.BFS(input[key], key, finalOutput)
                     }
 
                 }
                 if (type == "string") {
+
+
                     out.push({
                         name: key,
                         type: "string"
