@@ -275,26 +275,33 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
         },
         documentLoader: options.documentLoader
 
-      })) 
-      
-      if(!purposeResult.valid){
+      }))
+
+      if (!purposeResult.valid) {
         throw Error(purposeResult)
-      } 
-    
+      }
+
       const returnObj = {
         verified: true,
-        status: {
-          canonicalizationHashVerified,
-          signatureVerified: verified,
-        }
+        results: [
+          {
+            proof,
+            verified,
+            verficationMethod: vm,
+            purposeResult,
+          
+          }
+        ],
+
       };
 
       if (proof.canonicalizationHash && canonicalizationHashVerified === false) {
         throw Error(`Invalid canonicalizationHash`);
       }
-      return returnObj
+      return returnObj;
     } catch (error) {
-      return { verified: false, status: undefined, error };
+      return { verified: false,
+      error: error };
     }
 
   }

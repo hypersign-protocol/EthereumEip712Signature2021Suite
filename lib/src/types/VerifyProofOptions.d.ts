@@ -11,7 +11,12 @@ export interface VerifyProofOptions {
 }
 export interface VerifyProofResult {
     verified: boolean;
-    status: any;
+    results?: Array<{
+        proof: any;
+        verified: boolean;
+        verficationMethod: any;
+        purposeResult: any;
+    }>;
     error?: any;
 }
 //# sourceMappingURL=VerifyProofOptions.d.ts.map
