@@ -259,7 +259,13 @@ describe('Suite Testcase ', () => {
   it('should successfully create and verify a proof over basic document where schema is embedded', async () => {
     const proof = await EthereumEip712Signature2021obj.createProof({
       document: vector1.inputDocument,
-      purpose: new purposes.AssertionProofPurpose(),
+      purpose: new purposes.AssertionProofPurpose({
+        controller: {
+          "@context": ["https://w3id.org/security/v2"],
+          "id": vector1.proof.verificationMethod,
+          "assertionMethod": [vector1.proof.verificationMethod]
+        },
+      }),
       verificationMethod: vector1.inputOptions.verificationMethod,
       date: vector1.inputOptions.date,
       domain: vector1.inputOptions.domain,
@@ -289,7 +295,13 @@ describe('Suite Testcase ', () => {
       document: vector1.inputDocument,
       types: proof.eip712.types,
       domain: proof.eip712.domain,
-      purpose: new purposes.AssertionProofPurpose(),
+      purpose: new purposes.AssertionProofPurpose({
+        controller: {
+          "@context": ["https://w3id.org/security/v2"],
+          "id": vector1.proof.verificationMethod,
+          "assertionMethod": [vector1.proof.verificationMethod]
+        }
+      }),
       documentLoader: customDocLoader,
     });
 
@@ -301,7 +313,13 @@ describe('Suite Testcase ', () => {
   it('should successfully create and verify a proof over nested document where schema is  embedded', async () => {
     const proof = await EthereumEip712Signature2021obj.createProof({
       document: vector2.inputDocument,
-      purpose: new purposes.AssertionProofPurpose(),
+      purpose: new purposes.AssertionProofPurpose({
+        controller: {
+          "@context": ["https://w3id.org/security/v2"],
+          "id": vector2.proof.verificationMethod,
+          "assertionMethod": [vector2.proof.verificationMethod]
+        }
+      }),
       verificationMethod: vector2.inputOptions.verificationMethod,
       date: vector2.inputOptions.date,
       domain: vector2.inputOptions.domain,
@@ -315,7 +333,15 @@ describe('Suite Testcase ', () => {
       document: vector2.inputDocument,
       types: proof.eip712.types,
       domain: proof.eip712.domain,
-      purpose: new purposes.AssertionProofPurpose(),
+      purpose: new purposes.AssertionProofPurpose(
+        {
+          controller: {
+            "@context": ["https://w3id.org/security/v2"],
+            "id": vector2.proof.verificationMethod,
+            "assertionMethod": [vector2.proof.verificationMethod]
+          }
+        }
+      ),
       documentLoader: customDocLoader,
     });
 
@@ -326,7 +352,14 @@ describe('Suite Testcase ', () => {
 
     const proof = await EthereumEip712Signature2021obj.createProof({
       document: vector3.inputDocument,
-      purpose: new purposes.AssertionProofPurpose(),
+      purpose: new purposes.AssertionProofPurpose({
+        controller: {
+          "@context": ["https://w3id.org/security/v2"],
+          "id": vector3.proof.verificationMethod,
+          "assertionMethod": [vector3.proof.verificationMethod]
+
+        }
+      }),
       verificationMethod:
         vector3.inputOptions.verificationMethod,
       date: vector3.inputOptions.date,
@@ -340,16 +373,160 @@ describe('Suite Testcase ', () => {
     const verificationResult = await EthereumEip712Signature2021obj.verifyProof({
       proof: proof,
       document: vector3.inputDocument,
-      purpose: new purposes.AssertionProofPurpose(),
+      purpose: new purposes.AssertionProofPurpose({
+        controller: {
+          "@context": ["https://w3id.org/security/v2"],
+          "id": vector3.proof.verificationMethod,
+          "assertionMethod": [vector3.proof.verificationMethod]
+
+        }
+      }),
       documentLoader: customDocLoader,
     });
 
     assert.equal(verificationResult.verified, true)
 
 
+
+
   })
 
+  // it("should create and verify proof over nested data where schema is not embedded Authenticateion", async () => {
 
+
+  //   let document:any={
+  //     "@context": [
+  //         "https://www.w3.org/2018/credentials/v1"
+  //     ],
+  //     "type": [
+  //         "VerifiablePresentation"
+  //     ],
+  //     "verifiableCredential": [
+  //         "{\"@context\":[\"https://www.w3.org/2018/credentials/v1\",{\"hs\":\"https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/schema/sch:hid:testnet:zwmFvU936TksRA4RDceNGtExA8EHq5MySgVaPwgZrw9Y:1.0:\"},{\"name\":\"hs:name\"},\"https://w3id.org/security/suites/ed25519-2020/v1\"],\"credentialSchema\":{\"id\":\"sch:hid:testnet:zwmFvU936TksRA4RDceNGtExA8EHq5MySgVaPwgZrw9Y:1.0\",\"type\":\"JsonSchemaValidator2018\"},\"credentialStatus\":{\"id\":\"https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/credential/vc:hid:testnet:z2bJ2ZVXwWD9AqbxyYnBYuwiyPDS2WMXzjNqPiP1CQ8wv\",\"type\":\"CredentialStatusList2017\"},\"credentialSubject\":{\"id\":\"did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc\",\"name\":\"Pratap\"},\"expirationDate\":\"2027-12-10T18:30:00Z\",\"id\":\"vc:hid:testnet:z2bJ2ZVXwWD9AqbxyYnBYuwiyPDS2WMXzjNqPiP1CQ8wv\",\"issuanceDate\":\"2023-07-10T11:30:11Z\",\"issuer\":\"did:hid:testnet:zCKKYyNKR3ZRno4irBTceoJZKHCXDAzpHLHhfHd7R9xiY\",\"proof\":{\"created\":\"2023-07-10T11:31:51Z\",\"proofPurpose\":\"assertionMethod\",\"proofValue\":\"z37Gi31C5ppvJXb9hmtNKx93KWGY4xYPe4HFAWXVjSBixtaYeGTZFhTqu8Vp2fj23JAqPZzKaA5wSy8oR7bLYJaBZ\",\"type\":\"Ed25519Signature2020\",\"verificationMethod\":\"did:hid:testnet:zCKKYyNKR3ZRno4irBTceoJZKHCXDAzpHLHhfHd7R9xiY#key-1\"},\"type\":[\"VerifiableCredential\",\"RailwayTicketSchema\"]}"
+  //     ],
+  //     "id": "vp:hid:testnet:z7t2FtFGUVBmz2ULKXBUbB3jWnfvmTHKXU1SaGH8BMPyy",
+  //     // "proof": {
+  //     //     "canonicalizationHash": "de86f387fb3119beffe7025c0ca972d719f56b668a7d481ebd66483855ad77da",
+  //     //     "challenge": "1234",
+  //     //     "created": "2023-07-11T06:22:33Z",
+  //     //     "domain": "https://testnet.hypersign.id",
+  //     //     "proofPurpose": "authentication",
+  //     //     "type": "EthereumEip712Signature2021",
+  //     //     "verificationMethod": "did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1",
+  //     //     "proofValue": "0x37d27f454568b1a5072b278f1126fbbdc8679c3344e99ba31ba1cea359dda6b4594b522fa3397353d1fad358cff1641167876a62818895f39e2dbd6714796ddd1c",
+  //     //     "eip712": {
+  //     //         "domain": {
+  //     //             "name": "https://testnet.hypersign.id"
+  //     //         },
+  //     //         "types": {
+  //     //             "Document": [
+  //     //                 {
+  //     //                     "name": "@context",
+  //     //                     "type": "string[]"
+  //     //                 },
+  //     //                 {
+  //     //                     "name": "id",
+  //     //                     "type": "string"
+  //     //                 },
+  //     //                 {
+  //     //                     "name": "type",
+  //     //                     "type": "string[]"
+  //     //                 },
+  //     //                 {
+  //     //                     "name": "verifiableCredential",
+  //     //                     "type": "string[]"
+  //     //                 }
+  //     //             ]
+  //     //         },
+  //     //         "primaryType": "Document"
+  //     //     }
+  //     // }
+  // }
+
+  //   const proof = await EthereumEip712Signature2021obj.createProof({
+  //     document: document,
+  //     purpose: new purposes.AuthenticationProofPurpose({
+  //       challenge: '123',
+  //       domain: 'https://testnet.hypersign.id',
+  //        controller:{
+  //         "@context":["https://w3id.org/security/v2"],
+  //         "id":"did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc",
+  //         authentication: [
+  //           'did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1'
+  //         ]}
+  //     }),
+  //     verificationMethod: 'did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1',
+  //     date: new Date(),
+  //     documentLoader: customDocLoader,
+  //     domain:{name:"https://testnet.hypersign.id"}
+  //   });
+
+
+
+  //   const verificationResult = await EthereumEip712Signature2021obj.verifyProof({
+  //     proof: proof,
+  //     document:document,
+  //     purpose:  new purposes.AuthenticationProofPurpose({
+  //       challenge: '123',
+  //       domain: 'https://testnet.hypersign.id',
+  //       controller:{
+  //         "@context":["https://w3id.org/security/v2"],
+  //         "id":"did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc",
+  //         authentication: [
+  //           'did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1'
+  //         ]
+
+
+  //       }
+  //     }),
+  //     documentLoader: customDocLoader,
+  //     domain:{name:"https://testnet.hypersign.id"}
+  //   });
+  //   console.log(verificationResult);
+
+  // })
+
+
+  it("Authentication Proof of Purpose ", async () => {
+
+    const purpose = new purposes.AuthenticationProofPurpose({
+      challenge: '123',
+      domain: 'https://testnet.hypersign.id',
+      controller: {
+        "@context": ["https://w3id.org/security/v2"],
+        "id": "did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc",
+        authentication: [
+          'did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1'
+        ]
+
+      }
+    })
+
+
+    const validate = await purpose.validate({
+      challenge: '123',
+      domain: 'https://testnet.hypersign.id',
+      // controller: {
+      //   "@context": ["https://w3id.org/security/v2"],
+      //   "id": "did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc",
+      //   authentication: [
+      //     'did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1'
+      //   ]
+
+      // }
+    }, {
+      verificationMethod: {
+        id: 'did:hid:testnet:0xf3EC6A9363a3d84A33277939de3AeCa3c3EAefcc#key-1',
+
+
+      }
+    }
+
+
+    );
+    assert.equal(validate.valid, true); 
+
+  })
 
 
 

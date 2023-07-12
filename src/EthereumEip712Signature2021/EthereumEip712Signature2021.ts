@@ -164,7 +164,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     }
 
 
-    let embed = options.embed ?? true;
+    let embed = options.embed ? options.embed : true;
 
     if (options.verificationMethod !== undefined && typeof options.verificationMethod !== "string") {
       throw TypeError(`"verificationMethod" must be a URI string`);
@@ -193,10 +193,10 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     });
 
 
-    let domain = options.domain ?? {};
+    let domain = options.domain ? options.domain : {};
     const primaryType = options.primaryType ?? "Document";
     const eip712TypedData = new EIP712TypedData()
-    let types = options.types ?? eip712TypedData.generateTypes(options.document, primaryType);
+    let types = options.types ? options.types : eip712TypedData.generateTypes(options.document, primaryType);
     const toBeSignedDocument: EIP712SignatureOptions = {
       types,
       domain,
@@ -226,12 +226,12 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
   async verifyProof(options: VerifyProofOptions): Promise<VerifyProofResult> {
     const { proof, document } = options;
 
-    let domain = options.domain ?? {};
+    let domain = options.domain ? options.domain : {};
 
     const primaryType = options.primaryType ?? "Document";
     const eip712TypedData = new EIP712TypedData()
 
-    let types = options.types ?? eip712TypedData.generateTypes(options.document, primaryType);
+    let types = options.types ? options.types : eip712TypedData.generateTypes(options.document, primaryType);
     if (typeof types === "string") {
       if (options.documentLoader === undefined) {
         throw new Error("documentLoader must be defined for remote types")
@@ -269,9 +269,18 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
         throw Error(`Invalid signature`);
       }
 
-      if (!(options.purpose.match(canonizeProof, {}))) {
-        throw Error(`Invalid purpose`);
-      }
+      const purposeResult = (await options.purpose.validate(canonizeProof, {
+        verificationMethod: {
+          id: vm,
+        },
+        documentLoader: options.documentLoader
+
+      })) 
+      
+      if(!purposeResult.valid){
+        throw Error(purposeResult)
+      } 
+    
       const returnObj = {
         verified: true,
         status: {
