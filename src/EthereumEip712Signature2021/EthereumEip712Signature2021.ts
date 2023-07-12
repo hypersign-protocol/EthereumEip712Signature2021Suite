@@ -288,10 +288,14 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
             proof,
             verified,
             verficationMethod: vm,
-            purposeResult,
+            purposeResult: {valid:purposeResult.valid},
           
           }
         ],
+        statusResult: {
+          canonicalizationHashVerified,
+          signatureVerified: verified,
+        }
 
       };
 
