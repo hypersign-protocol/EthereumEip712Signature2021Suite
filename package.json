@@ -19,7 +19,7 @@
     "bip39": "^3.1.0",
     "eth-sig-util": "^3.0.1",
     "ethers": "^6.3.0",
-    "jcs": "git+https://github.com/hypersign-protocol/JCS.git",
+    "jcs": "https://github.com/hypersign-protocol/JCS.git",
     "jsonld": "^3.1.1",
     "jsonld-signatures": "^9.3.0",
     "web3": "^1.9.0"
