@@ -1,5 +1,5 @@
 import Web3 from "web3";
-declare const suites: any;
+import { suites } from 'jsonld-signatures/lib/suites';
 import { SignatureSuiteOptions, SuiteVerifyOptions } from "../types/SuiteOptions";
 import { CreateProofOptions } from "../types/ProofOptions";
 import { SuiteSignOptions } from "../types/SuiteSignType";

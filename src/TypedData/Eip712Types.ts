@@ -1,7 +1,7 @@
 // https://w3c-ccg.github.io/ethereum-eip712-signature-2021-spec/#types-generation
 
 
-const { JCS } = require('jcs')
+import { JCS } from "jcs"
 // add canonnicalize to JSON
 
 // @ts-ignore

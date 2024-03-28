@@ -3,13 +3,14 @@ import ed25519signature2020 from './ed25519-signature-2020.json'
 import securityv2 from './security-v2.json'
 import credentials from './credentials.json'
 import EthereumEip712Signature2021 from './EthereumEip712Signature2021.json'
-const jsonld = require('jsonld');
+// @ts-ignore
+import jsonld from 'jsonld'
 import schemaOrgContext from '../schemaOrg.json'
 import dataintegrety from './vc-data-integrety.json'
 import ecdsasecp2020 from './lds-ecdsa-secp256k1-recovery2020.json'
 // Ref: https://github.com/digitalbazaar/jsonld.js/#custom-document-loader
 // @ts-ignore
-const nodeDocumentLoader = jsonld.documentLoaders.node();
+const nodeDocumentLoader = jsonld.documentLoader;
 const CONTEXTS: any = Object.freeze({
     "https://w3id.org/security/suites/eip712sig-2021/v1": {...EthereumEip712Signature2021},
     "https://schema.org": schemaOrgContext,

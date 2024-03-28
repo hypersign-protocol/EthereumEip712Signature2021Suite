@@ -1,6 +1,10 @@
 
 import Web3 from "web3";
-const { suites } = require('jsonld-signatures')
+//@ts-ignore
+
+import  {suites } from 'jsonld-signatures/lib/suites'
+
+// import {suites} from 'jsonld-signatures'
 import { recoverTypedSignature, signTypedData, signTypedMessage } from 'eth-sig-util'
 
 //@ts-ignore
@@ -38,7 +42,11 @@ const docloader = async (url: any, options: any) => {
 
 
 
-const { JCS } = require('jcs')
+
+import {JCS} from 'jcs'
+
+
+
 // @ts-ignore
 JSON.canonify = JCS.cannonicalize
 
@@ -159,6 +167,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
   async createProof(options: CreateProofOptions): Promise<any> {
     let proof: Record<string, any> = {
+      // @ts-ignore
       type: this.type,
 
     }
