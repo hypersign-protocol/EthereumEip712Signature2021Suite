@@ -54,7 +54,7 @@ JSON.canonify = JCS.cannonicalize
 
 class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
   index: number;
-  web3: Web3;
+  web3: Web3 | any;
   wallet: any;
   account: any;
   mnemonic: string;
@@ -366,7 +366,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     //@ts-ignore
     if (this.web3._provider !== undefined && this.web3._provider !== null) {
       //@ts-ignore
-      const from = await this.web3._provider.selectedAddress;
+      const from = await this.web3._provider.selectedAddress? await this.web3._provider.selectedAddress: this.web3._provider.accounts;
       const params = [from, JSON.stringify(verifyData)]
       const method = 'eth_signTypedData_v4'
 
@@ -432,7 +432,23 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
 
   async getSignFromMetamask(method: string, params: any[], provider: any) {
+    console.log(
+      {
+        method,
+        params,
+        from: provider.selectedAddress?provider.selectedAddress:provider.accounts[0],
+      }
+    );
+    
     return new Promise((resolve, reject) => {
+
+      if (this.web3) {
+        
+        const signature = this.web3.signTypedData(this.web3.config, {
+          ...JSON.parse(params[1]),
+        });
+        resolve(signature);
+      }
       provider.sendAsync(
         {
           method,

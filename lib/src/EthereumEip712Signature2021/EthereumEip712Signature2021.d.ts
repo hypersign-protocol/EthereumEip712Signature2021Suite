@@ -6,7 +6,7 @@ import { SuiteSignOptions } from "../types/SuiteSignType";
 import { VerifyProofOptions, VerifyProofResult } from "../types/VerifyProofOptions";
 declare class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     index: number;
-    web3: Web3;
+    web3: Web3 | any;
     wallet: any;
     account: any;
     mnemonic: string;
@@ -19,16 +19,16 @@ declare class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     generateKeyPair(seed?: string): Promise<{
         publicKey: string;
         privateKey: string;
-        address: string;
+        address: any;
     }>;
     fromPrivateKey(privateKey: string): {
-        address: string;
+        address: any;
         privateKey: string;
     };
     switchAccount(index: number): Promise<{
         publicKey: string;
         privateKey: string;
-        address: string;
+        address: any;
     }>;
     toJWK(): Error;
     canonicalizationHash(message: object): Promise<string>;

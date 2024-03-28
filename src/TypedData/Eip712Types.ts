@@ -117,7 +117,10 @@ class EIP712TypedData {
 
 
         // Canonicalize the type names
+        console.log(input);
+
         //@ts-ignore
+        
         input = JSON.parse(JSON.canonify(input))
         let out: any = this.BFS(input, primaryType, this.finalOutput)
         this.finalOutput = this.finalOutput
