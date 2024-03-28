@@ -1,5 +1,5 @@
 
-![Build](https://github.com/hypersign-protocol/EthereumEip712Signature2021Suite/workflows/Build/badge.svg)
+[![Build](https://github.com/hypersign-protocol/EthereumEip712Signature2021Suite/actions/workflows/Actions.yml/badge.svg)](https://github.com/hypersign-protocol/EthereumEip712Signature2021Suite/actions/workflows/Actions.yml)
 # EthereumEip712Signature2021Suite 
 ### Supports only the `eth_signTypedData_v4` signature method.
 
