@@ -27,6 +27,21 @@ import { VerifyProofOptions, VerifyProofResult } from "../types/VerifyProofOptio
 import { CONTEXTS } from '../Context/v1'
 import { signTypedData_v4, recoverTypedSignature_v4 } from "eth-sig-util";
 
+export function getTypesForEIP712Domain(params:{ domain:any }) {
+  return [
+      typeof params.domain?.name === 'string' && { name: 'name', type: 'string' },
+      params.domain?.version && { name: 'version', type: 'string' },
+      typeof params.domain?.chainId === 'number' && {
+          name: 'chainId',
+          type: 'uint256',
+      },
+      params.domain?.verifyingContract && {
+          name: 'verifyingContract',
+          type: 'address',
+      },
+      params.domain?.salt && { name: 'salt', type: 'bytes32' },
+  ].filter(Boolean);
+}
 const docloader = async (url: any, options: any) => {
   if (url in CONTEXTS) {
     return {
@@ -206,6 +221,9 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     const primaryType = options.primaryType ?? "Document";
     const eip712TypedData = new EIP712TypedData()
     let types = options.types ? options.types : eip712TypedData.generateTypes(options.document, primaryType);
+   
+    types.EIP712Domain= getTypesForEIP712Domain({ domain })
+
     const toBeSignedDocument: EIP712SignatureOptions = {
       types,
       domain,
@@ -432,23 +450,11 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
 
   async getSignFromMetamask(method: string, params: any[], provider: any) {
-    console.log(
-      {
-        method,
-        params,
-        from: provider.selectedAddress?provider.selectedAddress:provider.accounts[0],
-      }
-    );
+   
     
     return new Promise((resolve, reject) => {
 
-      if (this.web3) {
-        
-        const signature = this.web3.signTypedData(this.web3.config, {
-          ...JSON.parse(params[1]),
-        });
-        resolve(signature);
-      }
+     
       provider.sendAsync(
         {
           method,
@@ -463,7 +469,10 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
           }
         }
       );
+      
     })
+
+    
   }
 }
 

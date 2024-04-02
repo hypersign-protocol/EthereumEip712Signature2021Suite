@@ -4,6 +4,9 @@ import { SignatureSuiteOptions, SuiteVerifyOptions } from "../types/SuiteOptions
 import { CreateProofOptions } from "../types/ProofOptions";
 import { SuiteSignOptions } from "../types/SuiteSignType";
 import { VerifyProofOptions, VerifyProofResult } from "../types/VerifyProofOptions";
+export declare function getTypesForEIP712Domain(params: {
+    domain: any;
+}): any[];
 declare class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     index: number;
     web3: Web3 | any;
