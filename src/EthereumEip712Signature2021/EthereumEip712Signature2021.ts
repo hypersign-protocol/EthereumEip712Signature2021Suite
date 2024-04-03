@@ -101,7 +101,9 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     this.proofSignatureKey = "proofValue";
   }
 
-
+  ensureSuiteContext(params: { document: any; addSuiteContext: any }) {
+    return;
+  }
 
   getMnemonic() {
     if (this.mnemonic === "") {
@@ -181,6 +183,10 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
   }
 
   async createProof(options: CreateProofOptions): Promise<any> {
+
+    const vmId=options.purpose.controller.id
+
+    
     let proof: Record<string, any> = {
       // @ts-ignore
       type: this.type,
@@ -205,8 +211,8 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     if (date !== undefined) {
       proof.created = date;
     }
-    proof.verificationMethod = options.verificationMethod;
-
+    proof.verificationMethod = options.document.verificationMethod.find((obj:any) => obj.controller===vmId)
+    proof.verificationMethod=this.getVerificationMethod(proof)
 
 
     proof = await options.purpose.update(proof, {
@@ -215,6 +221,9 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
       documentLoader: options.documentLoader,
       expansionMap: options.expansionMap,
     });
+
+    
+
 
 
     let domain = options.domain ? options.domain : {};
@@ -343,6 +352,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
   }
 
   canonizeProof(proof: any): Record<string, any> {
+    
     proof = { ...proof };
     delete proof[this.proofSignatureKey];
 
@@ -361,6 +371,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
   }
 
   getVerificationMethod(proof: any): string {
+    
     let verificationMethod = proof.verificationMethod;
 
     if (typeof verificationMethod === "object") {

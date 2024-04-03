@@ -18,6 +18,10 @@ declare class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     signer: any;
     proofSignatureKey: string;
     constructor(options: SignatureSuiteOptions, web3?: Web3);
+    ensureSuiteContext(params: {
+        document: any;
+        addSuiteContext: any;
+    }): void;
     getMnemonic(): string;
     generateKeyPair(seed?: string): Promise<{
         publicKey: string;

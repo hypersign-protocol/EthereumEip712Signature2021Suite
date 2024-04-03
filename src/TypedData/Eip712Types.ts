@@ -14,6 +14,7 @@ class EIP712TypedData {
     private keys: Map<string, number> = new Map<string, number>()
     finalOutput: any = {}
     private BFS(input: any, type: string, finalOutput: any) {
+        
         let out: any = []
         let queue = []
         queue.push(type)
@@ -117,7 +118,6 @@ class EIP712TypedData {
 
 
         // Canonicalize the type names
-        console.log(input);
 
         //@ts-ignore
         
