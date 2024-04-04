@@ -2,14 +2,15 @@
   "name": "ethereumeip712signature2021suite",
   "version": "0.0.1",
   "description": "EthereumEip712Signature2021   (https://w3c-ccg.github.io/ethereum-eip712-signature-2021-spec)",
-  "main": "lib/src/index.js",
-  "type":"module",
+  "type": "module",
+
   "scripts": {
-    "build": "rimraf lib && tsc --build",
+    "build": "rimraf lib && tsc --build  ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json ",
     "test": "nyc --reporter=text --no-clean mocha --timeout 20000",
     "coverage": "nyc report --reporter=lcov --reporter=json-summary  --report-dir coverage",
     "check-coverage": "update-badge"
   },
+  
   "keywords": [
     "eip712",
     "EthereumEip712Signature2021"
@@ -33,7 +34,16 @@
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "rimraf": "^5.0.0",
+    "rollup": "^4.14.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
+  },
+  "exports": {
+    ".": {
+      "types": "./build/types/lib.d.ts",
+      "require": "./build/cjs/lib.js",
+      "import": "./build/esm/lib.js",
+      "default": "./build/esm/lib.js"
+    }
   }
 }
