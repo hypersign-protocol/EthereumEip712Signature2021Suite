@@ -4,3 +4,4 @@ browserTest/dist
 coverage
 .vscode_output
 .nyc
+lib

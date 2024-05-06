@@ -211,7 +211,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     if (date !== undefined) {
       proof.created = date;
     }
-    proof.verificationMethod = options.document.verificationMethod.find((obj:any) => obj.controller===vmId)
+    proof.verificationMethod = options.document.verificationMethod.find((obj:any) => obj.id===vmId)
     proof.verificationMethod=this.getVerificationMethod(proof)
 
 
