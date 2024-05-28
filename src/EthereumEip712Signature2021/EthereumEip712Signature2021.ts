@@ -11,7 +11,6 @@ import { recoverTypedSignature, signTypedData, signTypedMessage } from 'eth-sig-
 import jsonld from 'jsonld'
 
 import crypto from "crypto";
-const nodeDocumentLoader = jsonld.documentLoader;
 
 
 import { Mnemonic, HDNodeWallet, TypedDataField, verifyTypedData, Wallet, BaseWallet, SigningKey } from "ethers";
@@ -24,7 +23,7 @@ import { EIP712TypedData } from "../TypedData/Eip712Types";
 import { EIP712SignatureOptions } from "../types/EIP712SignatureOptions";
 import { SuiteSignOptions } from "../types/SuiteSignType";
 import { VerifyProofOptions, VerifyProofResult } from "../types/VerifyProofOptions";
-import { CONTEXTS } from '../Context/v1'
+import { docloader } from '../Context/v1'
 import { signTypedData_v4, recoverTypedSignature_v4 } from "eth-sig-util";
 
 export function getTypesForEIP712Domain(params:{ domain:any }) {
@@ -41,18 +40,6 @@ export function getTypesForEIP712Domain(params:{ domain:any }) {
       },
       params.domain?.salt && { name: 'salt', type: 'bytes32' },
   ].filter(Boolean);
-}
-const docloader = async (url: any, options: any) => {
-  if (url in CONTEXTS) {
-    return {
-      contextUrl: null, // this is for a context via a link header
-      document: CONTEXTS[url], // this is the actual document that was loaded
-      documentUrl: url // this is the actual context URL after redirects
-    };
-  }
-  // call the default documentLoader
-
-  return nodeDocumentLoader(url);
 }
 
 
@@ -168,12 +155,12 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
 
 
-  async canonicalizationHash(message: object) {
+  async canonicalizationHash(message: object,options:any) {
     const c14nDocument = await jsonld.canonize(message, {
       algorithm: "URDNA2015",
       format: "application/n-quads",
       useNative: false,
-      documentLoader: docloader
+      documentLoader: options.documentLoader
     })
 
 
@@ -240,7 +227,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
       message: options.document,
     };
 
-    proof.canonicalizationHash = await this.canonicalizationHash(toBeSignedDocument.message)
+    proof.canonicalizationHash = await this.canonicalizationHash(toBeSignedDocument.message,{documentLoader:options.documentLoader})
 
     const [canonizeProof, canonizeDocument] = await this.createVerifyData({ document: toBeSignedDocument, proof })
 
@@ -290,7 +277,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
       const vm = this.getVerificationMethod(canonizeProof);
 
-      const canonicalizationHashVerified = proof.canonicalizationHash ? await this.canonicalizationHash(document) === proof.canonicalizationHash : null
+      const canonicalizationHashVerified = proof.canonicalizationHash ? await this.canonicalizationHash(document,{documentLoader:options.documentLoader}) === proof.canonicalizationHash : null
 
       const verified = this.verifySignature({
         signature: proof[this.proofSignatureKey],

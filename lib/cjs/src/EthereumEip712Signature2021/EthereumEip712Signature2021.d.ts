@@ -38,7 +38,7 @@ declare class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
         address: any;
     }>;
     toJWK(): Error;
-    canonicalizationHash(message: object): Promise<string>;
+    canonicalizationHash(message: object, options: any): Promise<string>;
     createProof(options: CreateProofOptions): Promise<any>;
     verifyProof(options: VerifyProofOptions): Promise<VerifyProofResult>;
     canonize(input: any): Record<string, any>;
