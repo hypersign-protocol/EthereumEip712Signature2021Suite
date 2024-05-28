@@ -168,12 +168,12 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
 
 
-  async canonicalizationHash(message: object) {
+  async canonicalizationHash(message: object,options:any) {
     const c14nDocument = await jsonld.canonize(message, {
       algorithm: "URDNA2015",
       format: "application/n-quads",
       useNative: false,
-      documentLoader: docloader
+      documentLoader: options.documentLoader
     })
 
 
@@ -240,7 +240,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
       message: options.document,
     };
 
-    proof.canonicalizationHash = await this.canonicalizationHash(toBeSignedDocument.message)
+    proof.canonicalizationHash = await this.canonicalizationHash(toBeSignedDocument.message,{documentLoader:options.documentLoader})
 
     const [canonizeProof, canonizeDocument] = await this.createVerifyData({ document: toBeSignedDocument, proof })
 
@@ -290,7 +290,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
       const vm = this.getVerificationMethod(canonizeProof);
 
-      const canonicalizationHashVerified = proof.canonicalizationHash ? await this.canonicalizationHash(document) === proof.canonicalizationHash : null
+      const canonicalizationHashVerified = proof.canonicalizationHash ? await this.canonicalizationHash(document,{documentLoader:options.documentLoader}) === proof.canonicalizationHash : null
 
       const verified = this.verifySignature({
         signature: proof[this.proofSignatureKey],
