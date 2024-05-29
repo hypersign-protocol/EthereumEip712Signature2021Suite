@@ -50,7 +50,7 @@ declare class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
     getVerificationMethod(proof: any): string;
     sign(options: SuiteSignOptions): Promise<Record<string, any>>;
     verifySignature(options: SuiteVerifyOptions): boolean;
-    extractAddressFromDID(vmId: string, verficationMethod: Array<any>): string;
+    extractAddressFromDID(vmId: string, verificationMethod: Array<any>): string;
     getSignFromMetamask(method: string, params: any[], provider: any): Promise<unknown>;
 }
 export default EthereumEip712Signature2021;
