@@ -426,7 +426,7 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
 
     if (
       recoveredAddress.toLowerCase() ===
-      this.extractAddressFromDID(options.verificationMethod,options.message.verificationMethod).toLowerCase()
+      this.extractAddressFromVm(options.verificationMethod,options.message.verificationMethod).toLowerCase()
     ) {
       return true;
     }
@@ -434,11 +434,11 @@ class EthereumEip712Signature2021 extends suites.LinkedDataSignature {
   }
 
 
-  extractAddressFromDID(vmId: string, verificationMethod:Array<any>): string {
+  extractAddressFromVm(vmId: string, verificationMethod:Array<any>): string {
 
 
    const vm= verificationMethod.find(vm=>vm.id===vmId)
-   const blockchainAccountIdSplit= vm.blockchainAccountId.split
+   const blockchainAccountIdSplit= vm.blockchainAccountId.split(":")
     // last elem of array
     let address = blockchainAccountIdSplit[blockchainAccountIdSplit.length - 1];
     return address.toLocaleLowerCase();
