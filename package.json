@@ -16,13 +16,13 @@
   "author": "Pratap Mridha",
   "license": "Apache-2.0",
   "dependencies": {
-    "bip39": "^3.1.0",
-    "eth-sig-util": "^3.0.1",
-    "ethers": "^6.3.0",
+    "bip39": "3.1.0",
+    "eth-sig-util": "3.0.1",
+    "ethers": "6.3.0",
     "jcs": "https://github.com/hypersign-protocol/JCS.git",
-    "jsonld": "^3.1.1",
-    "jsonld-signatures": "^9.3.0",
-    "web3": "^1.9.0"
+    "jsonld": "3.1.1",
+    "jsonld-signatures": "9.3.0",
+    "web3": "1.9.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",
